@@ -1,0 +1,38 @@
+html, body{
+    height: 100%;
+    font-family: Arial, sans-serif;
+    min-height: 300px;
+}
+.page{
+    min-height: 300px;
+    min-width: 400px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.sidebar{
+    width: 60px;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #7d7d7d;
+    background: #f0f3ea url("../../icons/icon48.png") 50% 20px no-repeat;
+    position: relative;
+}
+.sidebar .plugin_name{
+    position: absolute;
+    top: 110px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.content{
+    float: left;
+    width: calc(100% - 241px);
+    padding: 30px 20px;
+    font-size: 1.2rem;
+    min-height: 200px;
+
+}
+.content #status{
+    padding: 20px 0;
+}
