@@ -76,7 +76,7 @@ var readyStateCheckInterval = setInterval(function () {
 
                 chrome.runtime.sendMessage({method: "getName"}, function(response) {
                     var name = response.name || 'Looks Awesome',
-                        plugin_id = parseInt(window.location.href.replace(/\D+/g, '')),
+                        plugin_id = parseInt(window.location.pathname.replace(/\D+/g, '')),
                         docs_url = window['la_envato_plugins'][plugin_id]['docs'],
                         contact_form = window['la_envato_plugins']['contact_form'];
                         sign = '\n\n<p>Best Regards, <br />' + name + '</p>__________________<p><a href="' + docs_url + '">Docs & FAQ</a> | <a href="' + contact_form + '">Send us a private message</a></p>';
