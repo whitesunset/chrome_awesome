@@ -6,23 +6,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <body>
 <div class="page">
-    <div class="sidebar">
-        <!--<div class="plugin_name">
-            Looks Awesome <br> Envato Sign
-        </div>-->
+    <div class="navbar">
+        <div class="wrapper">
+            <div class="plugin_name">
+                Hey, you're looks awesome!
+            </div>
+            <div id="status">&nbsp;</div>
+            <button class="pure-button pure-button-primary" id="save">Save</button>
+        </div>
     </div>
     <div class="content">
-        <div class="pure-form">
-            <fieldset>
-                <legend>Looks Awesome Envato Sign</legend>
-                <label for="email">Your name:</label>
-                <input type="text" name="name" id="name"/>
-                <div id="status">&nbsp;</div>
-                <button class="pure-button pure-button-primary" id="save">Save</button>
-            </fieldset>
+        <div class="pure-form form">
+            <div class="row">
+                <div class="column column-50">
+                    <fieldset>
+                        <legend>Options</legend>
+                        <div class="field-block">
+                            <label class="label" for="name">Your name:</label>
+                            <input class="field" type="text" name="name" id="name"/>
+                        </div>
+                        <div class="field-block">
+                            <label class="label" for="sign">Custom sign:</label>
+                            <textarea class="field" name="sign" id="sign"></textarea>
+                        </div>
+                        <div class="field-block">
+                            <label for="sign_enabled" class="label">Sign enabled</label>
+                            <label class="toggle">
+                                <input type="hidden" name="sign_enabled" id="sign_enabled">
+                                <span class="handle"></span>
+                            </label>
+                        </div>
+                        <div class="field-block">
+                            <label class="label"></label>
+                            <div class="hint spoiler">
+                                List of available tags:
+                                <ul>
+                                    <li>
+                                        <b>%name%</b> - your name from settings
+                                    </li>
+                                    <li>
+                                        <b>%plugin_name%</b> - Envato plugin name
+                                    </li>
+                                    <li>
+                                        <b>%plugin_id%</b> - Envato plugin ID
+                                    </li>
+                                    <li>
+                                        <b>%plugin_docs%</b> - plugin docs URL
+                                    </li>
+                                    <li>
+                                        <b>%plugin_demo%</b> - plugin demo site URL
+                                    </li>
+                                    <li>
+                                        <b>%la%</b> - alias for "Looks Awesome"
+                                    </li>
+                                    <li>
+                                        <b>%contact_form%</b> - Envato contact form URL
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="column column-50">
+                    <fieldset>
+                        <legend>
+                            Templates
+                            <button class="pure-button button-round button-success" id="add_template">+</button>
+                        </legend>
+                        <div class="templates" id="templates"></div>
+
+                    </fieldset>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script src="../../js/jquery/jquery.min.js"></script>
 <script src="options.js"></script>
 </body>
 </html>

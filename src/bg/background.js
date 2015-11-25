@@ -5,6 +5,23 @@
 // });
 
 
+function openOrFocusOptionsPage() {
+    var optionsUrl = chrome.extension.getURL('src/options_custom/index.html');
+    chrome.tabs.query({}, function(extensionTabs) {
+        var found = false;
+        for (var i=0; i < extensionTabs.length; i++) {
+            if (optionsUrl == extensionTabs[i].url) {
+                found = true;
+                console.log("tab id: " + extensionTabs[i].id);
+                chrome.tabs.update(extensionTabs[i].id, {"selected": true});
+            }
+        }
+        if (found == false) {
+            chrome.tabs.create({url: "src/options_custom/index.html"});
+        }
+    });
+}
+
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
   function(request, sender, sendResponse) {
@@ -13,8 +30,27 @@ chrome.extension.onMessage.addListener(
   });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.method == "getName")
-        sendResponse({name: localStorage['la_envato_name']});
-    else
+    if (request.method == "getData"){
+        var data = {
+                name: localStorage['la_name'],
+                sign: localStorage['la_sign'],
+                sign_enabled: localStorage['la_sign_enabled'],
+                templates: []
+            },
+            templates = JSON.parse(localStorage['la_templates']);
+        templates.forEach(function (item, i, arr) {
+            data.templates.push({
+                name: item.name,
+                code: item.code
+            });
+        });
+        sendResponse(data);
+    }else{
         sendResponse({}); // snub them.
+    }
+});
+
+// Called when the user clicks on the browser action icon.
+chrome.browserAction.onClicked.addListener(function(tab) {
+    openOrFocusOptionsPage();
 });
