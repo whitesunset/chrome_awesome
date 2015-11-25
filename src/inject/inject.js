@@ -20,7 +20,8 @@ var readyStateCheckInterval = setInterval(function () {
             comment = comment.replace(/(\r\n|\n|\r)/gm,"");
 
             textarea.val(comment);
-            textarea.css('min-height', '30px');
+            textarea.css('height', '30px');
+            textarea.css('min-height', 'auto');
             return comment;
         }
 
@@ -61,14 +62,13 @@ var readyStateCheckInterval = setInterval(function () {
                 if(sign_enabled == 1){
                     $('.f-textarea').on('focus', function () {
                         if ($(this).val() == '') {
-                            var self = $(this);
                             set_comment($(this), '\n\n' + sign, 114);
                         }
                     });
                 }
 
                 $('.f-textarea').on('blur', function () {
-                    if ($(this).val() == sign) {
+                    if ($(this).val().trim() == sign) {
                         reset_comment($(this), templates, sign, values);
                     }
                 });
@@ -94,6 +94,14 @@ var readyStateCheckInterval = setInterval(function () {
                         comment = comment + '\n\n' + sign;
                     }
                     set_comment(textarea, template_code + '\n' + comment);
+                    textarea.off('onedit');
+                    textarea.on('edit', function () {
+                        var comment = reset_comment(textarea, templates, sign, values);
+                        if(sign_enabled == 1){
+                            comment = comment + '\n\n' + sign;
+                        }
+                        set_comment(textarea, template_code + '\n' + comment);
+                    });
                 });
             });
         });
