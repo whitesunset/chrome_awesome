@@ -48,6 +48,9 @@ function restore_options() {
         templates = JSON.parse(localStorage['la_templates']);
     }else{
         templates = [{
+            name: 'Hello',
+            code: 'Hello %client_name%,'
+        },{
             name: 'Access',
             code: 'Hi, please <a href="%contact_form%">contact us</a> and send your URL and temporary admin access so we can inspect this and help.'
         },{

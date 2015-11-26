@@ -2,11 +2,31 @@ var readyStateCheckInterval = setInterval(function () {
     if (document.readyState === "complete") {
         clearInterval(readyStateCheckInterval);
 
+        function fix_scroll(){
+            var location = window.location.href,
+                comment_id = location.substr(location.lastIndexOf("comment_") + 8);
+            $('html, body').animate({
+                scrollTop: $("#comment_" + comment_id).offset().top
+            }, 1000);
+        }
+
+        function draw_toolbars(templates){
+            var toolbar = '<div class="la_chrome_toolbar">';
+            toolbar += '<div class="la_chrome_templates">';
+            templates.forEach(function (item, i, arr) {
+                toolbar += '<button class="la_chrome_template" data-la-template-id="' + i + '" id="la_chrome_template_' + i + '">' + item.name + '</button>'
+            });
+            toolbar += '</div>';
+            toolbar += '</div>';
+
+            $('.form.js-comment-reply-form').before(toolbar);
+            fix_scroll();
+        }
+
         function set_comment(textarea, content){
             setTimeout(function () {
                 textarea.val(content);
                 textarea.css('min-height', '200px');
-                textarea.caretToStart();
             }, 1);
         }
 
@@ -27,11 +47,17 @@ var readyStateCheckInterval = setInterval(function () {
 
         function replace_tags(content, values){
             var result = content,
-                tags = ['name', 'plugin_id', 'plugin_name', 'plugin_docs', 'plugin_demo', 'la', 'contact_form'];
+                tags = ['name', 'client_name', 'plugin_id', 'plugin_name', 'plugin_docs', 'plugin_demo', 'la', 'contact_form'];
             tags.forEach(function (item, i, arr) {
                 result = result.replace_all('%' + item + '%', values[item]);
             });
             return result;
+        }
+
+        function get_client(item){
+            var thread = $(item).parents('.js-discussion'),
+            client = $('.js-comment', thread).eq(0).find('.comment__info .media .media__body a').html();
+            return client;
         }
 
         // smart replace for templates
@@ -47,6 +73,7 @@ var readyStateCheckInterval = setInterval(function () {
                     plugin_id = parseInt(window.location.pathname.replace(/\D+/g, '')),
                     values = {
                         name: name,
+                        client_name: '',
                         plugin_id: plugin_id,
                         plugin_name: defaults[plugin_id]['name'],
                         plugin_docs: defaults[plugin_id]['docs'],
@@ -60,9 +87,12 @@ var readyStateCheckInterval = setInterval(function () {
                     sign = replace_tags(response.sign, values);
 
                 if(sign_enabled == 1){
-                    $('.f-textarea').on('focus', function () {
+                    $('.f-textarea').on('focus', function (e) {
                         if ($(this).val() == '') {
-                            set_comment($(this), '\n\n' + sign, 114);
+                            set_comment($(this), '\n\n' + sign);
+                            setTimeout(function () {
+                                $(e.target).caretToStart();
+                            }, 10);
                         }
                     });
                 }
@@ -74,20 +104,14 @@ var readyStateCheckInterval = setInterval(function () {
                 });
 
 
-                var toolbar = '<div class="la_chrome_toolbar">';
-                toolbar += '<div class="la_chrome_templates">';
-                templates.forEach(function (item, i, arr) {
-                    toolbar += '<button class="la_chrome_template" data-la-template-id="' + i + '" id="la_chrome_template_' + i + '">' + item.name + '</button>'
-                });
-                toolbar += '</div>';
-                toolbar += '</div>';
-
-                $('.form.js-comment-reply-form').before(toolbar)
+                draw_toolbars(templates);
                 
                 $(document).on('click', '.la_chrome_template', function (e) {
                     var textarea = $(this).parents('.la_chrome_toolbar').siblings('form').find('textarea'),
                         template_id = parseInt($(e.target).attr('data-la-template-id')),
-                        template_code = replace_tags(templates[template_id]['code'], values);
+                        client_name = get_client($(this));
+                    values.client_name = client_name;
+                    var template_code = replace_tags(templates[template_id]['code'], values);
 
                     var comment = reset_comment(textarea, templates, sign, values);
                     if(sign_enabled == 1){
