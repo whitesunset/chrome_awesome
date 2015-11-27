@@ -1,53 +1,66 @@
 {
-  "contact_form": "http://codecanyon.net/user/looks_awesome#contact",
+  "contact_form": ["http://goo.gl/kfrJ8D", "http://codecanyon.net/user/looks_awesome#contact"],
+  "site": ["http://goo.gl/VNBRe1", "http://looks-awesome.com/"],
+  "twitter": ["https://goo.gl/4fq2kA", "https://twitter.com/looks_awesooome"],
+  "facebook": ["https://goo.gl/jRyUTv", "https://www.facebook.com/looksawesooome"],
   "13705636": {
     "name": "Excited! — Testimonials Showcase for WordPress",
-    "demo": "http://testimonial.looks-awesome.com",
-    "docs": "http://testimonial.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/FIsoAS", "http://testimonial.looks-awesome.com"],
+    "docs": ["http://goo.gl/YvCkOu", "http://testimonial.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   },
   "13353713": {
     "name": "WordPress Social Stacks — Responsive Slider",
-    "demo": "http://stack.looks-awesome.com",
-    "docs": "http://stack.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/4P9lP1", "http://stack.looks-awesome.com"],
+    "docs": ["http://goo.gl/mOvGZd", "http://stack.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   },
   "12723018": {
     "name": "Team Builder — Meet The Team WordPress Plugin",
-    "demo": "http://team.looks-awesome.com",
-    "docs": "http://team.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/VSw2N3", "http://team.looks-awesome.com"],
+    "docs": ["http://goo.gl/1vN0KD", "http://team.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   },
   "11096958": {
     "name": "Flow-Flow — Social Streams PHP Script",
-    "demo": "http://flow.looks-awesome.com/?ver=php",
-    "docs": "http://flow-php.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/B1TJ3c", "http://flow.looks-awesome.com/?ver=php"],
+    "docs": ["http://goo.gl/kRsX6x", "http://flow-php.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ["https://goo.gl/6DLJ8O", "https://docs.google.com/forms/d/1yB8YrR4FTU8UeQ9oEWN11hX8Xh-5YCO5xv6trFPVUlg/viewform?c=0&w=1"]
   },
   "9319434": {
     "name": "Flow-Flow — Social Streams for WordPress",
-    "demo": "http://flow.looks-awesome.com",
-    "docs": "http://flow.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/FtWh5K", "http://flow.looks-awesome.com"],
+    "docs": ["http://goo.gl/CAG4yO", "http://flow.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ["https://goo.gl/6DLJ8O", "https://docs.google.com/forms/d/1yB8YrR4FTU8UeQ9oEWN11hX8Xh-5YCO5xv6trFPVUlg/viewform?c=0&w=1"]
   },
   "9056249": {
     "name": "Ninja Kick Series: All in One Pack",
-    "demo": "http://codecanyon.net/item/ninja-kick-series-all-in-one-pack/full_screen_preview/9056249",
-    "docs": "http://nks.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/bEvT2D", "http://codecanyon.net/item/ninja-kick-series-all-in-one-pack/full_screen_preview/9056249"],
+    "docs": ["http://goo.gl/hCazHC", "http://nks.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   },
   "8969399": {
     "name": "Ninja Kick: Subscription WordPress Plugin",
-    "demo": "http://sf.looks-awesome.com",
-    "docs": "http://sf.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/3UzPZR", "http://sf.looks-awesome.com"],
+    "docs": ["http://goo.gl/tDQYgI", "http://sf.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   },
   "8012790": {
     "name": "Superfly — Responsive WordPress Menu Plugin",
-    "demo": "http://superfly.looks-awesome.com",
-    "docs": "http://superfly.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/buQxlQ", "http://superfly.looks-awesome.com"],
+    "docs": ["http://goo.gl/ncFBT9", "http://superfly.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ["https://goo.gl/KXFJQz", "https://docs.google.com/forms/d/1gjbcd7ieJeq7XxNgbHJ3w8fX78uXOm73dJnSTrauh9s/viewform"]
   },
   "6796296": {
     "name": "Ninja Kick: Sliding Panel for WordPress",
-    "demo": "http://sidebar.looks-awesome.com",
-    "docs": "http://sidebar.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/r1F6a1", "http://sidebar.looks-awesome.com"],
+    "docs": ["http://goo.gl/jmK3PW", "http://sidebar.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   },
   "6598780": {
     "name": "Ninja Kick: WordPress Contact Form",
-    "demo": "http://contactform.looks-awesome.com",
-    "docs": "http://contactform.looks-awesome.com/docs/Getting_Started"
+    "demo": ["http://goo.gl/eWczwf", "http://contactform.looks-awesome.com"],
+    "docs": ["http://goo.gl/IcJKMt", "http://contactform.looks-awesome.com/docs/Getting_Started"],
+    "quiz": ""
   }
 }

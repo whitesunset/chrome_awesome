@@ -9,7 +9,7 @@
     <div class="navbar">
         <div class="wrapper">
             <div class="plugin_name">
-                Hey, you're looks awesome!
+                Hey, you look awesome!
             </div>
             <div id="status">&nbsp;</div>
             <button class="pure-button pure-button-primary" id="save">Save</button>
@@ -37,35 +37,50 @@
                             </label>
                         </div>
                         <div class="field-block">
-                            <label class="label"></label>
+                            <label class="label">&nbsp;</label>
                             <div class="hint spoiler">
                                 List of available tags:
                                 <ul>
                                     <li>
-                                        <b>%name%</b> - your name from settings
+                                        <input class="tag" type="text" readonly value="<%= name %>" /> your name from settings
                                     </li>
                                     <li>
-                                        <b>%client_name%</b> - client name from comment thread
+                                        <input class="tag" type="text" readonly value="<%= client_name %>" /> client name from comment thread
                                     </li>
                                     <li>
-                                        <b>%plugin_name%</b> - Envato plugin name
+                                        <input class="tag" type="text" readonly value="<%= plugin_name %>" /> Envato plugin name
                                     </li>
                                     <li>
-                                        <b>%plugin_id%</b> - Envato plugin ID
+                                        <input class="tag" type="text" readonly value="<%= plugin_id %>" /> Envato plugin ID
                                     </li>
                                     <li>
-                                        <b>%plugin_docs%</b> - plugin docs URL
+                                        <input class="tag" type="text" readonly value="<%= plugin_docs %>" /> plugin docs URL
                                     </li>
                                     <li>
-                                        <b>%plugin_demo%</b> - plugin demo site URL
+                                        <input class="tag" type="text" readonly value="<%= plugin_demo %>" /> plugin demo site URL
                                     </li>
                                     <li>
-                                        <b>%la%</b> - alias for "Looks Awesome"
+                                        <input class="tag" type="text" readonly value="<%= plugin_quiz %>" /> plugin quiz form URL
                                     </li>
                                     <li>
-                                        <b>%contact_form%</b> - Envato contact form URL
+                                        <input class="tag" type="text" readonly value="<%= la %>" /> alias for "Looks Awesome"
+                                    </li>
+                                    <li>
+                                        <input class="tag" type="text" readonly value="<%= site %>" /> LA website URL
+                                    </li>
+                                    <li>
+                                        <input class="tag" type="text" readonly value="<%= twitter %>" /> LA twitter profile URL
+                                    </li>
+                                    <li>
+                                        <input class="tag" type="text" readonly value="<%= facebook %>" /> LA facebook page URL
+                                    </li>
+                                    <li>
+                                        <input class="tag" type="text" readonly value="<%= contact_form %>" /> Envato contact form URL
                                     </li>
                                 </ul>
+                                Conditional operators example:
+                                <pre><% if(plugin_quiz) { %> Hello world <% } %></pre>
+                                "Hello world" string will be included only if plugin have quiz form
                             </div>
                         </div>
                     </fieldset>

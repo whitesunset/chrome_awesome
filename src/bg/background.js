@@ -50,6 +50,41 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
+// set default templates
+if(!localStorage['la_templates']){
+    var templates = [{
+        name: 'Hello',
+        code: 'Hello <%= client_name %>,'
+    },{
+        name: 'Access',
+        code: 'Hi, please <a href="<%= contact_form %>">contact us</a> and send your URL and temporary admin access so we can inspect this and help.'
+    },{
+        name: 'Live URL',
+        code: 'Hello, please share live URL.'
+    },{
+        name: 'Later',
+        code: 'Hello. We plan to add this in future updates.\nThank you for feedback!'
+    }];
+    localStorage['la_templates'] = JSON.stringify(templates);
+}
+if(!localStorage['la_name']){
+    var name =  'Looks Awesome';
+    localStorage['la_name'] = name;
+}
+if(!localStorage['la_sign']){
+    var sign = '<p>Best Regards, <br /><%= name %></p>__________________' +
+        '<p>' +
+        '<a href="<%= plugin_docs %>">Docs & FAQ</a> | ' +
+        '<a href="<%= contact_form %>">Send us a private message</a> | ' +
+        '<% if (plugin_quiz) { %><a href="<%= plugin_quiz %>">User Suggestion Form</a> | <% } %>' +
+        '<a href="<%= twitter %>">Twitter</a> | ' +
+        '<a href="<%= facebook %>">Facebook</a></p>';
+    localStorage['la_sign'] = sign;
+}
+if(!localStorage['la_sign_enabled']){
+    var sign_enabled = 1;
+    localStorage['la_sign_enabled'] = sign_enabled;
+}
 
 // Called when the user clicks on the browser action icon.
 chrome.browserAction.onClicked.addListener(function(tab) {

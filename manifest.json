@@ -1,6 +1,6 @@
 {
   "name": "Looks Awesome - Envato Sign",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "manifest_version": 2,
   "description": "Add custom sign to each comment automatically",
   "homepage_url": "http://looks-awesome.com/",
@@ -32,8 +32,9 @@
       ],
       "js": [
 		"js/jquery/jquery.js",
-        "src/inject/inject.js",
-        "js/util.js"
+		"js/underscore.js",
+        "js/util.js",
+        "src/inject/inject.js"
       ],
       "css": [
         "src/inject/inject.css"

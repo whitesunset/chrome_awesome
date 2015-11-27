@@ -159,6 +159,15 @@ ul li{
 .form #status{
     padding: 20px 0;
 }
+.form .tag{
+    text-align: center;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+.form pre{
+    display: block;
+    text-align: left;
+}
 
 /**
  * toggle

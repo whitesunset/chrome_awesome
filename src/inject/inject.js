@@ -5,9 +5,12 @@ var readyStateCheckInterval = setInterval(function () {
         function fix_scroll(){
             var location = window.location.href,
                 comment_id = location.substr(location.lastIndexOf("comment_") + 8);
-            $('html, body').animate({
-                scrollTop: $("#comment_" + comment_id).offset().top
-            }, 1000);
+            if(location.lastIndexOf("comment_") > -1) {
+                comment_id = comment_id.replace(/\D+/g, '');
+                $('html, body').animate({
+                    scrollTop: $("#comment_" + comment_id).offset().top
+                }, 1000);
+            }
         }
 
         function draw_toolbars(templates){
@@ -46,12 +49,27 @@ var readyStateCheckInterval = setInterval(function () {
         }
 
         function replace_tags(content, values){
-            var result = content,
-                tags = ['name', 'client_name', 'plugin_id', 'plugin_name', 'plugin_docs', 'plugin_demo', 'la', 'contact_form'];
+            var tags = [
+                'name',
+                'client_name',
+                'plugin_id',
+                'plugin_name',
+                'plugin_docs',
+                'plugin_demo',
+                'plugin_quiz',
+                'la',
+                'site',
+                'twitter',
+                'facebook',
+                'contact_form'
+            ];
+
+            content = content.replace_all('<a', '<a target="_blank"');
             tags.forEach(function (item, i, arr) {
-                result = result.replace_all('%' + item + '%', values[item]);
+                content = content.replace_all('%' + item + '%', '<%= ' + item + ' %>');
             });
-            return result;
+            var template = _.template(content);
+            return template(values);
         }
 
         function get_client(item){
@@ -76,10 +94,14 @@ var readyStateCheckInterval = setInterval(function () {
                         client_name: '',
                         plugin_id: plugin_id,
                         plugin_name: defaults[plugin_id]['name'],
-                        plugin_docs: defaults[plugin_id]['docs'],
-                        plugin_demo: defaults[plugin_id]['demo'],
+                        plugin_docs: defaults[plugin_id]['docs'][0],
+                        plugin_demo: defaults[plugin_id]['demo'][0],
+                        plugin_quiz: defaults[plugin_id]['quiz'][0] || '',
                         la: la,
-                        contact_form: defaults['contact_form'],
+                        site: defaults['site'][0],
+                        twitter: defaults['twitter'][0],
+                        facebook: defaults['facebook'][0],
+                        contact_form: defaults['contact_form'][0],
                     },
 
                     sign_enabled = parseInt(response.sign_enabled),
@@ -117,14 +139,14 @@ var readyStateCheckInterval = setInterval(function () {
                     if(sign_enabled == 1){
                         comment = comment + '\n\n' + sign;
                     }
-                    set_comment(textarea, template_code + '\n' + comment);
+                    set_comment(textarea, template_code + '\n\n' + comment);
                     textarea.off('onedit');
                     textarea.on('edit', function () {
                         var comment = reset_comment(textarea, templates, sign, values);
                         if(sign_enabled == 1){
                             comment = comment + '\n\n' + sign;
                         }
-                        set_comment(textarea, template_code + '\n' + comment);
+                        set_comment(textarea, template_code + '\n\n' + comment);
                     });
                 });
             });

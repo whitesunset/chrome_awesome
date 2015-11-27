@@ -46,39 +46,15 @@ function restore_options() {
         templates;
     if(localStorage['la_templates']){
         templates = JSON.parse(localStorage['la_templates']);
-    }else{
-        templates = [{
-            name: 'Hello',
-            code: 'Hello %client_name%,'
-        },{
-            name: 'Access',
-            code: 'Hi, please <a href="%contact_form%">contact us</a> and send your URL and temporary admin access so we can inspect this and help.'
-        },{
-            name: 'Live URL',
-            code: 'Hello, please share live URL.'
-        },{
-            name: 'Later',
-            code: 'Hello. We plan to add this in future updates.\nThank you for feedback!'
-        }];
-        localStorage['la_templates'] = JSON.stringify(templates);
     }
     if(localStorage['la_name']){
         name =  localStorage['la_name']
-    }else{
-        name =  'Looks Awesome';
-        localStorage['la_name'] = name;
     }
     if(localStorage['la_sign']){
         sign =  localStorage['la_sign'];
-    }else{
-        sign = '<p>Best Regards, <br />%name%</p>__________________<p><a href="%plugin_docs%">Docs & FAQ</a> | <a href="%contact_form%">Send us a private message</a></p>';
-        localStorage['la_sign'] = sign;
     }
     if(localStorage['la_sign_enabled']){
         sign_enabled =  localStorage['la_sign_enabled']
-    }else{
-        sign_enabled = 1;
-        localStorage['la_sign_enabled'] = sign_enabled;
     }
 
 
@@ -121,6 +97,11 @@ function restore_options() {
                 $input.val('1');
                 $input.attr('data-checked', '1');
             }
+        });
+
+        // bind tag selection
+        $('.tag').on('focus', function () {
+            $(this).select();
         });
     });
 })(jQuery);
