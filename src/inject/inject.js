@@ -13,7 +13,8 @@ var readyStateCheckInterval = setInterval(function () {
             }
         }
 
-        function draw_toolbars(templates){
+        function draw_toolbars($textarea, templates){
+            console.log($($textarea))
             var toolbar = '<div class="la_chrome_toolbar">';
             toolbar += '<div class="la_chrome_templates">';
             templates.forEach(function (item, i, arr) {
@@ -22,7 +23,7 @@ var readyStateCheckInterval = setInterval(function () {
             toolbar += '</div>';
             toolbar += '</div>';
 
-            $('.form.js-comment-reply-form').before(toolbar);
+            $($textarea).parents('.form.js-comment-reply-form').before(toolbar);
             fix_scroll();
         }
 
@@ -64,7 +65,6 @@ var readyStateCheckInterval = setInterval(function () {
                 'contact_form'
             ];
 
-            content = content.replace_all('<a', '<a target="_blank"');
             tags.forEach(function (item, i, arr) {
                 content = content.replace_all('%' + item + '%', '<%= ' + item + ' %>');
             });
@@ -78,76 +78,94 @@ var readyStateCheckInterval = setInterval(function () {
             return client;
         }
 
+        function init($textarea, plugin_id, defaults, response){
+            var la = 'Looks Awesome',
+                name = response.name || la,
+
+                values = {
+                    name: name,
+                    client_name: '',
+                    plugin_id: plugin_id,
+                    plugin_name: defaults[plugin_id]['name'],
+                    plugin_docs: defaults[plugin_id]['docs'][0],
+                    plugin_demo: defaults[plugin_id]['demo'][0],
+                    plugin_quiz: defaults[plugin_id]['quiz'][0] || '',
+                    la: la,
+                    site: defaults['site'][0],
+                    twitter: defaults['twitter'][0],
+                    facebook: defaults['facebook'][0],
+                    contact_form: defaults['contact_form'][0],
+                },
+
+                sign_enabled = parseInt(response.sign_enabled),
+                templates = response.templates,
+                sign = replace_tags(response.sign, values);
+
+            if(sign_enabled == 1){
+                $('.f-textarea').on('focus', function (e) {
+                    if ($(this).val() == '') {
+                        set_comment($(this), '\n\n' + sign);
+                        setTimeout(function () {
+                            $(e.target).caretToStart();
+                        }, 10);
+                    }
+                });
+            }
+
+            $($textarea).on('blur', function () {
+                if ($(this).val().trim() == sign) {
+                    reset_comment($(this), templates, sign, values);
+                }
+            });
+
+            draw_toolbars($textarea, templates);
+
+            $(document).on('click', '.la_chrome_template', function (e) {
+                var textarea = $(this).parents('.la_chrome_toolbar').siblings('form').find('textarea'),
+                    template_id = parseInt($(e.target).attr('data-la-template-id')),
+                    client_name = get_client($(this));
+                values.client_name = client_name;
+                var template_code = replace_tags(templates[template_id]['code'], values);
+
+                var comment = reset_comment(textarea, templates, sign, values);
+                if(sign_enabled == 1){
+                    comment = comment + '\n\n' + sign;
+                }
+                set_comment(textarea, template_code + '\n\n' + comment);
+                textarea.off('onedit');
+                textarea.on('edit', function () {
+                    var comment = reset_comment(textarea, templates, sign, values);
+                    if(sign_enabled == 1){
+                        comment = comment + '\n\n' + sign;
+                    }
+                    set_comment(textarea, template_code + '\n\n' + comment);
+                });
+            });
+        }
+
         // smart replace for templates
         String.prototype.replace_all = function(find, replace){
             return this.split(find).join(replace);
             //return this.replace(new RegExp(find, 'g'), replace);
         };
 
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
         $.getJSON(chrome.extension.getURL('/cfg/default.json'), function (defaults) {
             chrome.runtime.sendMessage({method: "getData"}, function (response) {
-                var la = 'Looks Awesome',
-                    name = response.name || la,
-                    plugin_id = parseInt(window.location.pathname.replace(/\D+/g, '')),
-                    values = {
-                        name: name,
-                        client_name: '',
-                        plugin_id: plugin_id,
-                        plugin_name: defaults[plugin_id]['name'],
-                        plugin_docs: defaults[plugin_id]['docs'][0],
-                        plugin_demo: defaults[plugin_id]['demo'][0],
-                        plugin_quiz: defaults[plugin_id]['quiz'][0] || '',
-                        la: la,
-                        site: defaults['site'][0],
-                        twitter: defaults['twitter'][0],
-                        facebook: defaults['facebook'][0],
-                        contact_form: defaults['contact_form'][0],
-                    },
+                var textareas = $('.f-textarea').toArray();
 
-                    sign_enabled = parseInt(response.sign_enabled),
-                    templates = response.templates,
-                    sign = replace_tags(response.sign, values);
-
-                if(sign_enabled == 1){
-                    $('.f-textarea').on('focus', function (e) {
-                        if ($(this).val() == '') {
-                            set_comment($(this), '\n\n' + sign);
-                            setTimeout(function () {
-                                $(e.target).caretToStart();
-                            }, 10);
-                        }
-                    });
-                }
-
-                $('.f-textarea').on('blur', function () {
-                    if ($(this).val().trim() == sign) {
-                        reset_comment($(this), templates, sign, values);
+                textareas.forEach(function (item, i, arr) {
+                    var parent = $(item).parents('.js-discussion').eq(0),
+                        plugin_id_from_page = $('.comment__container > .js-comment > .comment__header > small > a', parent),
+                        plugin_id_from_url = window.location.pathname.replace(/\D+/g, ''),
+                        plugin_id = +plugin_id_from_url || + plugin_id_from_page,
+                        parent_comment_id = $('#comment_form_parent_id', parent).val();
+                    if(isNumeric(plugin_id)){
+                        init(item, plugin_id, defaults, response);
                     }
-                });
-
-
-                draw_toolbars(templates);
-                
-                $(document).on('click', '.la_chrome_template', function (e) {
-                    var textarea = $(this).parents('.la_chrome_toolbar').siblings('form').find('textarea'),
-                        template_id = parseInt($(e.target).attr('data-la-template-id')),
-                        client_name = get_client($(this));
-                    values.client_name = client_name;
-                    var template_code = replace_tags(templates[template_id]['code'], values);
-
-                    var comment = reset_comment(textarea, templates, sign, values);
-                    if(sign_enabled == 1){
-                        comment = comment + '\n\n' + sign;
-                    }
-                    set_comment(textarea, template_code + '\n\n' + comment);
-                    textarea.off('onedit');
-                    textarea.on('edit', function () {
-                        var comment = reset_comment(textarea, templates, sign, values);
-                        if(sign_enabled == 1){
-                            comment = comment + '\n\n' + sign;
-                        }
-                        set_comment(textarea, template_code + '\n\n' + comment);
-                    });
                 });
             });
         });
