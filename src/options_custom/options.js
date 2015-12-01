@@ -101,7 +101,7 @@ function restore_options() {
 
         // bind tag selection
         $('.tag').on('focus', function () {
-            $(this).select();
+            $(this).copyToClipboard();
         });
     });
 })(jQuery);
