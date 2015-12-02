@@ -14,7 +14,6 @@ var readyStateCheckInterval = setInterval(function () {
         }
 
         function draw_toolbars($textarea, templates){
-            console.log($($textarea))
             var toolbar = '<div class="la_chrome_toolbar">';
             toolbar += '<div class="la_chrome_templates">';
             templates.forEach(function (item, i, arr) {
@@ -23,7 +22,7 @@ var readyStateCheckInterval = setInterval(function () {
             toolbar += '</div>';
             toolbar += '</div>';
 
-            $($textarea).parents('.form.js-comment-reply-form').before(toolbar);
+            $($textarea).parents('form').eq(0).before(toolbar);
             fix_scroll();
         }
 
@@ -102,7 +101,7 @@ var readyStateCheckInterval = setInterval(function () {
                 sign = replace_tags(response.sign, values);
 
             if(sign_enabled == 1){
-                $('.f-textarea').on('focus', function (e) {
+                $($textarea).on('focus', function (e) {
                     if ($(this).val() == '') {
                         set_comment($(this), '\n\n' + sign);
                         setTimeout(function () {
@@ -155,14 +154,14 @@ var readyStateCheckInterval = setInterval(function () {
 
         $.getJSON(chrome.extension.getURL('/cfg/default.json'), function (defaults) {
             chrome.runtime.sendMessage({method: "getData"}, function (response) {
-                var textareas = $('.f-textarea').toArray();
+                var textareas = $('textarea.js-comment-new-reply-field').toArray();
 
                 textareas.forEach(function (item, i, arr) {
                     var parent = $(item).parents('.js-discussion').eq(0),
-                        plugin_id_from_page = $('.comment__container > .js-comment > .comment__header > small > a', parent),
-                        plugin_id_from_url = window.location.pathname.replace(/\D+/g, ''),
-                        plugin_id = +plugin_id_from_url || + plugin_id_from_page,
-                        parent_comment_id = $('#comment_form_parent_id', parent).val();
+                        plugin_id_from_page = $('.comment__container > .js-comment > .comment__header > small > a', parent).eq(0).attr('href'),
+                        plugin_id_from_url = window.location.pathname,
+                        plugin_id = plugin_id_from_page || plugin_id_from_url;
+                    plugin_id = +plugin_id.replace(/\D+/g, '');
                     if(isNumeric(plugin_id)){
                         init(item, plugin_id, defaults, response);
                     }
