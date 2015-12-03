@@ -2,18 +2,24 @@ var readyStateCheckInterval = setInterval(function () {
     if (document.readyState === "complete") {
         clearInterval(readyStateCheckInterval);
 
-        function fix_scroll(){
+        function fix_scroll() {
             var location = window.location.href,
                 comment_id = location.substr(location.lastIndexOf("comment_") + 8);
-            if(location.lastIndexOf("comment_") > -1) {
-                comment_id = comment_id.replace(/\D+/g, '');
-                $('html, body').animate({
-                    scrollTop: $("#comment_" + comment_id).offset().top
-                }, 1000);
-            }
+            setTimeout(function () {
+
+
+                if (location.lastIndexOf("comment_") > -1) {
+                    comment_id = comment_id.replace(/\D+/g, '');
+                    var scroll = $("#comment_" + comment_id).offset().top;
+                    console.log(scroll)
+                    $('html, body').animate({
+                        scrollTop: scroll
+                    }, 800);
+                }
+            }, 10);
         }
 
-        function draw_toolbars($textarea, templates){
+        function draw_toolbars($textarea, templates) {
             var toolbar = '<div class="la_chrome_toolbar">';
             toolbar += '<div class="la_chrome_templates">';
             templates.forEach(function (item, i, arr) {
@@ -23,24 +29,23 @@ var readyStateCheckInterval = setInterval(function () {
             toolbar += '</div>';
 
             $($textarea).parents('form').eq(0).before(toolbar);
-            fix_scroll();
         }
 
-        function set_comment(textarea, content){
+        function set_comment(textarea, content) {
             setTimeout(function () {
                 textarea.val(content);
                 textarea.css('min-height', '200px');
             }, 1);
         }
 
-        function reset_comment(textarea, templates, sign, values){
+        function reset_comment(textarea, templates, sign, values) {
             var comment = textarea.val();
             templates.forEach(function (item, i, arr) {
                 var template = replace_tags(item['code'], values);
                 comment = comment.replace_all(template, '');
             });
             comment = comment.replace_all(sign, '');
-            comment = comment.replace(/(\r\n|\n|\r)/gm,"");
+            comment = comment.replace(/(\r\n|\n|\r)/gm, "");
 
             textarea.val(comment);
             textarea.css('height', '30px');
@@ -48,7 +53,7 @@ var readyStateCheckInterval = setInterval(function () {
             return comment;
         }
 
-        function replace_tags(content, values){
+        function replace_tags(content, values) {
             var tags = [
                 'name',
                 'client_name',
@@ -71,13 +76,13 @@ var readyStateCheckInterval = setInterval(function () {
             return template(values);
         }
 
-        function get_client(item){
+        function get_client(item) {
             var thread = $(item).parents('.js-discussion'),
-            client = $('.js-comment', thread).eq(0).find('.comment__info .media .media__body a').html();
+                client = $('.js-comment', thread).eq(0).find('.comment__info .media .media__body a').html();
             return client;
         }
 
-        function init($textarea, plugin_id, defaults, response){
+        function init($textarea, plugin_id, defaults, response) {
             var la = 'Looks Awesome',
                 name = response.name || la,
 
@@ -100,7 +105,7 @@ var readyStateCheckInterval = setInterval(function () {
                 templates = response.templates,
                 sign = replace_tags(response.sign, values);
 
-            if(sign_enabled == 1){
+            if (sign_enabled == 1) {
                 $($textarea).on('focus', function (e) {
                     if ($(this).val() == '') {
                         set_comment($(this), '\n\n' + sign);
@@ -127,14 +132,14 @@ var readyStateCheckInterval = setInterval(function () {
                 var template_code = replace_tags(templates[template_id]['code'], values);
 
                 var comment = reset_comment(textarea, templates, sign, values);
-                if(sign_enabled == 1){
+                if (sign_enabled == 1) {
                     comment = comment + '\n\n' + sign;
                 }
                 set_comment(textarea, template_code + '\n\n' + comment);
                 textarea.off('onedit');
                 textarea.on('edit', function () {
                     var comment = reset_comment(textarea, templates, sign, values);
-                    if(sign_enabled == 1){
+                    if (sign_enabled == 1) {
                         comment = comment + '\n\n' + sign;
                     }
                     set_comment(textarea, template_code + '\n\n' + comment);
@@ -143,7 +148,7 @@ var readyStateCheckInterval = setInterval(function () {
         }
 
         // smart replace for templates
-        String.prototype.replace_all = function(find, replace){
+        String.prototype.replace_all = function (find, replace) {
             return this.split(find).join(replace);
             //return this.replace(new RegExp(find, 'g'), replace);
         };
@@ -156,13 +161,14 @@ var readyStateCheckInterval = setInterval(function () {
             chrome.runtime.sendMessage({method: "getData"}, function (response) {
                 var textareas = $('textarea.js-comment-new-reply-field').toArray();
 
+                fix_scroll();
                 textareas.forEach(function (item, i, arr) {
                     var parent = $(item).parents('.js-discussion').eq(0),
                         plugin_id_from_page = $('.comment__container > .js-comment > .comment__header > small > a', parent).eq(0).attr('href'),
                         plugin_id_from_url = window.location.pathname,
                         plugin_id = plugin_id_from_page || plugin_id_from_url;
                     plugin_id = +plugin_id.replace(/\D+/g, '');
-                    if(isNumeric(plugin_id)){
+                    if (isNumeric(plugin_id)) {
                         init(item, plugin_id, defaults, response);
                     }
                 });
