@@ -64,6 +64,9 @@ if(!localStorage['la_templates']){
     },{
         name: 'Later',
         code: 'Hello. We plan to add this in future updates.\nThank you for feedback!'
+    },{
+        name: 'Thanks',
+        code: 'It\'s great to hear! Hope you\'re enjoying our plugin. Let me know if you have further questions.<br>Please take a moment and <a href="http://codecanyon.net/downloads">rate</a> <%= plugin_name %>. Thanks!'
     }];
     localStorage['la_templates'] = JSON.stringify(templates);
 }
