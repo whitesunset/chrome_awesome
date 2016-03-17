@@ -77,7 +77,7 @@ if(!localStorage['la_name']){
 if(!localStorage['la_sign']){
     var sign = '<p>Best Regards, <br /><%= name %></p>__________________' +
         '<p>' +
-        '<a href="<%= plugin_docs %>">Docs & FAQ</a> | ' +
+        '<% if (plugin_docs) { %><a href="<%= plugin_docs %>">Docs & FAQ</a> | <% } %>' +
         '<a href="<%= contact_form %>">Send us a private message</a> | ' +
         '<% if (plugin_quiz) { %><a href="<%= plugin_quiz %>">User Suggestion Form</a> | <% } %>' +
         '<a href="<%= twitter %>">Twitter</a> | ' +

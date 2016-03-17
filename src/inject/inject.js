@@ -82,6 +82,40 @@ var readyStateCheckInterval = setInterval(function () {
             return client;
         }
 
+        function check_customers(){
+            var $comments = $('.js-discussion.comment__container-redesign');
+            $.each($comments, function (i, el) {
+                var $el = $(el);
+                var $labels = $('.js-comment.comment__item .comment__info span.e-text-label', $el)
+                var $new_labels = $('<div>').addClass('la_new_labels');
+                var purchased;
+                var supported;
+                var text;
+                $.each($labels, function (i, el) {
+                    var $el = $(el);
+                    var txt = $el.text().trim();
+                    if(txt == 'Purchased') purchased = true;
+                    if(txt == 'Supported') supported = true;
+                    //$el.hide();
+                });
+                var text = 'PURCHASED & SUPPORTED';
+
+                if(purchased && !supported){
+                    text = 'PURCHASED  BUT NOT SUPPORTED';
+                    $new_labels.addClass('la-warning')
+                }
+                if(!purchased){
+                    var text = 'NOT PURCHASED';
+                    $new_labels.addClass('la-error')
+                }
+                if(!purchased && !supported){
+                    text += ' & NOT SUPPORTED';
+                }
+                $new_labels.append(text);
+                $el.prepend($new_labels);
+            });
+        }
+
         function init($textarea, plugin_id, defaults, response) {
             var la = 'Looks Awesome',
                 name = response.name || la,
@@ -161,6 +195,7 @@ var readyStateCheckInterval = setInterval(function () {
             chrome.runtime.sendMessage({method: "getData"}, function (response) {
                 var textareas = $('textarea.js-comment-new-reply-field').toArray();
 
+                check_customers();
                 fix_scroll();
                 textareas.forEach(function (item, i, arr) {
                     var parent = $(item).parents('.js-discussion').eq(0),

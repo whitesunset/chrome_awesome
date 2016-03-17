@@ -1,8 +1,8 @@
 {
   "name": "Looks Awesome - Envato Sign",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "manifest_version": 2,
-  "description": "Add custom sign to each comment automatically",
+  "description": "Add some awesome invention for envato marketplace for authors",
   "homepage_url": "http://looks-awesome.com/",
   "icons": {
     "16": "icons/icon16.png",
@@ -31,6 +31,7 @@
     {
       "matches": [
         "http://codecanyon.net/*",
+        "http://graphicriver.net/*",
 		"http://themeforest.net/*"
       ],
       "js": [

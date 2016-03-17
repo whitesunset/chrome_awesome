@@ -32,3 +32,17 @@
     display: inline-block;
 }
 .la_chrome_toolbar .la_chrome_templates button{}
+.la_new_labels{
+    padding: 10px;
+    background: #82B541;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.la_new_labels.la-warning{
+    background: #bb726f
+}
+.la_new_labels.la-error{
+    background: #ce2424;
+}
+.la_new_labels div{}
