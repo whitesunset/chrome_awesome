@@ -82,8 +82,11 @@ var readyStateCheckInterval = setInterval(function () {
             return client;
         }
 
-        function check_customers(){
+        function check_customers(response){
             var $comments = $('.js-discussion.comment__container-redesign');
+            var enabled = parseInt(response.check_purchase_enabled);
+            console.log(response)
+            if(!enabled) return false;
             $.each($comments, function (i, el) {
                 var $el = $(el);
                 var $labels = $('.js-comment.comment__item .comment__info span.e-text-label', $el)
@@ -195,7 +198,7 @@ var readyStateCheckInterval = setInterval(function () {
             chrome.runtime.sendMessage({method: "getData"}, function (response) {
                 var textareas = $('textarea.js-comment-new-reply-field').toArray();
 
-                check_customers();
+                check_customers(response);
                 fix_scroll();
                 textareas.forEach(function (item, i, arr) {
                     var parent = $(item).parents('.js-discussion').eq(0),

@@ -15,11 +15,13 @@ function save_options() {
     var name = $('#name').val(),
         sign = $('#sign').val(),
         sign_enabled = parseInt($('#sign_enabled').attr('data-checked')),
+        check_purchase_enabled = parseInt($('#check_purchase_enabled').attr('data-checked')),
         templates = $('#templates .template').toArray();
 
     localStorage['la_name'] = name;
     localStorage['la_sign'] = sign;
     localStorage['la_sign_enabled'] = sign_enabled;
+    localStorage['la_check_purchase_enabled'] = check_purchase_enabled;
     var la_templates = new Array();
     templates.forEach(function (item, i, arr) {
         la_templates.push({
@@ -43,6 +45,7 @@ function restore_options() {
     var name,
         sign,
         sign_enabled,
+        check_purchase_enabled,
         templates;
     if(localStorage['la_templates']){
         templates = JSON.parse(localStorage['la_templates']);
@@ -56,6 +59,9 @@ function restore_options() {
     if(localStorage['la_sign_enabled']){
         sign_enabled =  localStorage['la_sign_enabled']
     }
+    if(localStorage['la_check_purchase_enabled']){
+        check_purchase_enabled =  localStorage['la_check_purchase_enabled']
+    }
 
 
 
@@ -67,6 +73,7 @@ function restore_options() {
     $('#name').val(name);
     $('#sign').val(sign);
     $('#sign_enabled').attr('data-checked', sign_enabled);
+    $('#check_purchase_enabled').attr('data-checked', check_purchase_enabled);
 }
 
 (function ($) {

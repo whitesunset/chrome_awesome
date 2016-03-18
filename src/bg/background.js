@@ -35,6 +35,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 name: localStorage['la_name'],
                 sign: localStorage['la_sign'],
                 sign_enabled: localStorage['la_sign_enabled'],
+                check_purchase_enabled: localStorage['la_check_purchase_enabled'],
                 templates: []
             },
             templates = JSON.parse(localStorage['la_templates']);
@@ -85,8 +86,10 @@ if(!localStorage['la_sign']){
     localStorage['la_sign'] = sign;
 }
 if(!localStorage['la_sign_enabled']){
-    var sign_enabled = 1;
-    localStorage['la_sign_enabled'] = sign_enabled;
+    localStorage['la_sign_enabled'] = 1;
+}
+if(!localStorage['la_check_purchase_enabled']){
+    localStorage['la_check_purchase_enabled'] = 0;
 }
 
 // Called when the user clicks on the browser action icon.
