@@ -85,7 +85,6 @@ var readyStateCheckInterval = setInterval(function () {
         function check_customers(response){
             var $comments = $('.js-discussion.comment__container-redesign');
             var enabled = parseInt(response.check_purchase_enabled);
-            console.log(response)
             if(!enabled) return false;
             $.each($comments, function (i, el) {
                 var $el = $(el);
