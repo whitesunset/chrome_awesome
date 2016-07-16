@@ -1,6 +1,6 @@
 {
   "name": "Looks Awesome - Envato Sign",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "manifest_version": 2,
   "description": "Add some awesome invention for envato marketplace for authors",
   "homepage_url": "http://looks-awesome.com/",
@@ -30,9 +30,9 @@
   "content_scripts": [
     {
       "matches": [
-        "http://codecanyon.net/*",
-        "http://graphicriver.net/*",
-		"http://themeforest.net/*"
+        "https://codecanyon.net/*",
+        "https://graphicriver.net/*",
+		"https://themeforest.net/*"
       ],
       "js": [
 		"js/jquery/jquery.js",
