@@ -1,9 +1,3 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
-
-// var settings = new Store("settings", {
-//     "sample_setting": "This is how you use Store.js to remember values"
-// });
-
 
 function openOrFocusOptionsPage() {
     var optionsUrl = chrome.extension.getURL('src/options_custom/index.html');
@@ -21,6 +15,11 @@ function openOrFocusOptionsPage() {
         }
     });
 }
+
+// Purge LocalStorage sign key on extension install/update
+chrome.runtime.onInstalled.addListener(function(details){
+    localStorage['la_sign'] = '';
+})
 
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
@@ -79,10 +78,9 @@ if(!localStorage['la_sign']){
     var sign = '<p>Best Regards, <br /><%= name %></p>__________________' +
         '<p>' +
         '<% if (plugin_docs) { %><a href="<%= plugin_docs %>">Docs & FAQ</a> | <% } %>' +
-        '<a href="<%= contact_form %>">Send us a private message</a> | ' +
+        '<a href="<%= contact_form %>">Help Center</a> | ' +
         '<% if (plugin_quiz) { %><a href="<%= plugin_quiz %>">User Suggestion Form</a> | <% } %>' +
-        '<a href="<%= twitter %>">Twitter</a> | ' +
-        '<a href="<%= facebook %>">Facebook</a></p>';
+        '<a href="<%= customization %>">Order Customization</a> | ';
     localStorage['la_sign'] = sign;
 }
 if(!localStorage['la_sign_enabled']){

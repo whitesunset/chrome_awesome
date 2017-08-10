@@ -132,8 +132,7 @@ var readyStateCheckInterval = setInterval(function () {
                     plugin_quiz: defaults[plugin_id]['quiz'][0] || '',
                     la: la,
                     site: defaults['site'][0],
-                    twitter: defaults['twitter'][0],
-                    facebook: defaults['facebook'][0],
+                    customization: defaults['customization'][0],
                     contact_form: defaults['contact_form'][0],
                 },
 

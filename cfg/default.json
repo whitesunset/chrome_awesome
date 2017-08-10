@@ -1,9 +1,9 @@
 {
-  "contact_form": ["http://goo.gl/AgNOA7", "http://looks-awesome.com/help"],
+  "contact_form": ["http://looks-awesome.com/help"],
   "site": ["http://goo.gl/VNBRe1", "http://looks-awesome.com/"],
   "twitter": ["https://goo.gl/4fq2kA", "https://twitter.com/looks_awesooome"],
   "facebook": ["https://goo.gl/jRyUTv", "https://www.facebook.com/looksawesooome"],
-
+  "customization": ["https://goo.gl/OeyDs6"],
 
   "15232298": {
     "name": "Chomolungma — PowerPoint Presentation Template Kit",
@@ -42,17 +42,28 @@
     "quiz": ""
   },
 
-
-   "16042896": {
+  "20429911": {
+    "name": "Instagram Feed Gallery — Grace for WordPress",
+    "demo": ["https://social-streams.com/instagram-feed-grace/demo/carousel/"],
+    "docs": ["http://docs.social-streams.com/"],
+    "quiz": ""
+  },
+  "20021001": {
+    "name": "Viral Quiz Maker - OnionBuzz for WordPress",
+    "demo": ["http://onionbuzz.com/wordpress/"],
+    "docs": ["http://onionbuzz.com/wordpress/docs/"],
+    "quiz": ""
+  },
+  "16042896": {
     "name": "Big Screens Extension for Flow-Flow Social Stream",
     "demo": ["http://goo.gl/skwObG", "http://social-streams.com/demo/big-screen-social-wall/"],
-    "docs": ["http://goo.gl/0arU9k", "http://social-streams.com/docs/"],
+    "docs": ["http://docs.social-streams.com/"],
     "quiz": ["https://goo.gl/6DLJ8O", "https://docs.google.com/forms/d/1yB8YrR4FTU8UeQ9oEWN11hX8Xh-5YCO5xv6trFPVUlg/viewform?c=0&w=1"]
   },
   "14935987": {
     "name": "Advertisement & Branding for Flow-Flow Social Stream",
     "demo": ["http://goo.gl/Kl0JE2", "http://flow.looks-awesome.com/?demo=11"],
-    "docs": ["https://goo.gl/5Qm0BG", "https://www.youtube.com/playlist?list=PLkF6fscz_-b8cZuc3ej1tEvcjWCe37vxI"],
+    "docs": ["http://docs.social-streams.com/"],
     "quiz": ["https://goo.gl/6DLJ8O", "https://docs.google.com/forms/d/1yB8YrR4FTU8UeQ9oEWN11hX8Xh-5YCO5xv6trFPVUlg/viewform?c=0&w=1"]
   },
   "13705636": {
@@ -64,7 +75,7 @@
   "13353713": {
     "name": "WordPress Social Stacks — Responsive Slider",
     "demo": ["http://goo.gl/4P9lP1", "http://stack.looks-awesome.com"],
-    "docs": ["http://goo.gl/mOvGZd", "http://stack.looks-awesome.com/docs/Getting_Started"],
+    "docs": ["http://docs.social-streams.com/collection/33-social-stacks"],
     "quiz": ""
   },
   "12723018": {
@@ -76,13 +87,13 @@
   "11096958": {
     "name": "Flow-Flow — Social Streams PHP Script",
     "demo": ["http://goo.gl/B1TJ3c", "http://flow.looks-awesome.com/?ver=php"],
-    "docs": ["http://goo.gl/kRsX6x", "http://flow-php.looks-awesome.com/docs/Getting_Started"],
+    "docs": ["http://docs.social-streams.com/collection/36-flow-flow-php"],
     "quiz": ["https://goo.gl/6DLJ8O", "https://docs.google.com/forms/d/1yB8YrR4FTU8UeQ9oEWN11hX8Xh-5YCO5xv6trFPVUlg/viewform?c=0&w=1"]
   },
   "9319434": {
     "name": "Flow-Flow — Social Streams for WordPress",
     "demo": ["http://goo.gl/FtWh5K", "http://flow.looks-awesome.com"],
-    "docs": ["http://goo.gl/CAG4yO", "http://flow.looks-awesome.com/docs/Getting_Started"],
+    "docs": ["http://docs.social-streams.com/collection/1-flow-flow-wp"],
     "quiz": ["https://goo.gl/6DLJ8O", "https://docs.google.com/forms/d/1yB8YrR4FTU8UeQ9oEWN11hX8Xh-5YCO5xv6trFPVUlg/viewform?c=0&w=1"]
   },
   "9056249": {

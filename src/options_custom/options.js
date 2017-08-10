@@ -85,7 +85,7 @@ function restore_options() {
         $(document).on('click', '.delete-template', function () {
             var template_id = parseInt($(this).parents('.template').attr('data-template-id'));
             var templates = JSON.parse(localStorage['la_templates']);
-            console.log($(this).parents('template'))
+
             templates.splice(template_id, 1);
             localStorage['la_templates'] = JSON.stringify(templates);
             $('[data-template-id="' + template_id + '"]').remove();
